@@ -4,20 +4,17 @@ import { Wave } from "./Wave";
 export function Hero() {
   return (
     <section className="hero px-section">
-      <div className="hero-content">
+      <div
+        className="hero-content"
+        style={{ gap: 32, alignItems: "flex-start", margin: "0 1px 0 0" }}
+      >
         <h1>
           The New Era of
           <br />
           Surety Bonds
         </h1>
-        <p>
-          Move beyond the limitations of antiquated systems.
-          <br />
-          Huddle streamlines the entire request-to-execution journey,
-          <br />
-          allowing brokers to focus on high-value advisory
-          <br />
-          and client relationships.
+        <p style={{ fontSize: 20 }}>
+          AI-powered platform designed for Surety Brokers
         </p>
         <div className="hero-cta">
           <Link href="#contact" className="btn btn-default btn-xl">

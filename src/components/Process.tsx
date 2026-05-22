@@ -34,7 +34,11 @@ const steps: Step[] = [
   },
 ];
 
-const visuals = [<FormAutofillMock key="0" />, <HighlightEvidenceMock key="1" />, <InboxMock key="2" />];
+const visuals = [
+  <FormAutofillMock key="0" />,
+  <HighlightEvidenceMock key="1" />,
+  <InboxMock key="2" />,
+];
 
 const NUM_STEPS = steps.length;
 const VISUAL_GAP_PX = 16;
@@ -42,8 +46,18 @@ const VISUAL_GAP_PX = 16;
 export function Process() {
   const wrapRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return;
     const wrap = wrapRef.current;
     if (!wrap) return;
 
@@ -51,27 +65,27 @@ export function Process() {
       const rect = wrap.getBoundingClientRect();
       const total = wrap.offsetHeight - window.innerHeight;
       if (total <= 0) return;
-
       const scrolled = -rect.top;
       const progress = Math.max(0, Math.min(1, scrolled / total));
       const activeStepFloat = progress * (NUM_STEPS - 1);
       const next = Math.round(activeStepFloat);
-
       setActive((prev) => (prev === next ? prev : next));
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
-
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [isMobile]);
+
+  // On mobile every step is "active" (all panels show stacked); on desktop only the scrolled-to one.
+  const isStepActive = (i: number) => (isMobile ? true : i === active);
 
   return (
     <section
       id="process"
       ref={wrapRef}
       className="process-wrap px-section"
-      style={{ height: `${NUM_STEPS * 100}vh` }}
+      style={isMobile ? undefined : { height: `${NUM_STEPS * 100}vh` }}
     >
       <div className="process-sticky">
         <div style={{ paddingBottom: "3rem" }}>
@@ -89,12 +103,18 @@ export function Process() {
               {steps.map((step, i) => (
                 <div
                   key={step.id}
-                  className={`process-step${i === active ? " active" : ""}`}
+                  className={`process-step${isStepActive(i) ? " active" : ""}`}
                   data-step={i}
                 >
                   <span className="id">{step.id}</span>
                   <h3>{step.title}</h3>
                   <p>{step.description}</p>
+                  {/* On mobile, each visual lives inside its step so they read inline */}
+                  {isMobile && (
+                    <div className="process-visual" data-visual={i}>
+                      {visuals[i]}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -103,35 +123,40 @@ export function Process() {
               {steps.map((step, i) => (
                 <div
                   key={step.id}
-                  className={`process-indicator${i === active ? " active" : ""}`}
+                  className={`process-indicator${
+                    isMobile || i === active ? " active" : ""
+                  }`}
                 />
               ))}
             </div>
           </div>
 
-          <div className="process-visual-col">
-            {visuals.map((visual, i) => {
-              const offset = i - active;
-              const distance = Math.abs(offset);
-              const isActive = distance === 0;
-              const opacity = isActive ? 1 : Math.max(0.2, 1 - distance * 0.4);
-              const scale = isActive ? 1 : 0.95;
-
-              return (
-                <div
-                  key={i}
-                  className="process-visual"
-                  data-visual={i}
-                  style={{
-                    transform: `translateY(calc(${offset} * (100% + ${VISUAL_GAP_PX}px))) scale(${scale})`,
-                    opacity,
-                  }}
-                >
-                  {visual}
-                </div>
-              );
-            })}
-          </div>
+          {!isMobile && (
+            <div className="process-visual-col">
+              {visuals.map((visual, i) => {
+                const offset = i - active;
+                const distance = Math.abs(offset);
+                const isActive = distance === 0;
+                const opacity = isActive
+                  ? 1
+                  : Math.max(0.2, 1 - distance * 0.4);
+                const scale = isActive ? 1 : 0.95;
+                return (
+                  <div
+                    key={i}
+                    className="process-visual"
+                    data-visual={i}
+                    style={{
+                      transform: `translateY(calc(${offset} * (100% + ${VISUAL_GAP_PX}px))) scale(${scale})`,
+                      opacity,
+                    }}
+                  >
+                    {visual}
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
     </section>
