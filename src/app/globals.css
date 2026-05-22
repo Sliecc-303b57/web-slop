@@ -3310,3 +3310,33 @@ main > section:has(> .section-rule) { padding-top: 1.5rem; }
     padding-right: 1rem;
   }
 }
+/* Mobile: animated dashed line through intro connectors */
+@media (max-width: 767px) {
+  .iv-stage > .iv-connector { position: relative; }
+  .iv-stage > .iv-connector::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1.5px;
+    background-image: linear-gradient(to bottom, var(--primary) 50%, transparent 50%);
+    background-size: 1.5px 12px;
+    background-repeat: repeat-y;
+    animation: ivDashVertical 1.2s linear infinite;
+    transform: translateX(-50%);
+    opacity: 0.55;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .iv-stage > .iv-connector > .line { display: none !important; }
+  .iv-stage > .iv-connector > .iv-core,
+  .iv-stage > .iv-connector > .iv-logo {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+@keyframes ivDashVertical {
+  to { background-position: 0 24px; }
+}
