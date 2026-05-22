@@ -2462,15 +2462,7 @@ body.nav-locked { overflow: hidden; }
 .team-portrait {
   position: relative;
   aspect-ratio: 4 / 3;
-  --portrait-color: var(--primary);
-  --portrait-bg:
-    linear-gradient(to top,
-      color-mix(in oklab, var(--portrait-color) 75%, black) 0%,
-      transparent 100%),
-    linear-gradient(to right,
-      var(--portrait-color) 0%,
-      color-mix(in oklab, var(--portrait-color) 62%, white) 100%);
-  background: var(--portrait-bg);
+  background: var(--background);
   overflow: hidden;
 }
 .team-portrait img {
@@ -2496,33 +2488,6 @@ body.nav-locked { overflow: hidden; }
 .team-card.is-smaller .team-portrait img { transform: scale(0.68); }
 .team-card.is-smaller:hover .team-portrait img,
 .team-card.is-smaller.is-open .team-portrait img { transform: scale(0.72); }
-
-/* Light-blue tint overlay (portrait-flattering soft-light blend) */
-.team-portrait::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--portrait-tint-color, #b8d4e8);
-  mix-blend-mode: soft-light;
-  opacity: var(--portrait-tint-amount, 0.45);
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Decorative ring on portrait */
-.team-portrait::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(to right, color-mix(in oklab, var(--border) 50%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in oklab, var(--border) 50%, transparent) 1px, transparent 1px);
-  background-size: 32px 32px;
-  mask-image: radial-gradient(circle at top right, black, transparent 50%);
-  -webkit-mask-image: radial-gradient(circle at top right, black, transparent 50%);
-  opacity: 0.5;
-  pointer-events: none;
-}
 
 .team-badge {
   position: absolute;
