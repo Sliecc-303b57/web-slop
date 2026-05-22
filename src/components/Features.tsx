@@ -88,6 +88,14 @@ export function Features() {
     return () => mq.removeEventListener("change", update);
   }, []);
 
+  // On mobile the panels render as an accordion inside each row, so the
+  // default state should be "everything closed" — not "first item open."
+  // Reset active to -1 once we detect mobile, unless the user has already
+  // tapped something.
+  useEffect(() => {
+    if (isMobile && !userInteracted) setActive(-1);
+  }, [isMobile, userInteracted]);
+
   // Reveal + auto-rotate while in view; pause when out of view
   useEffect(() => {
     const node = showcaseRef.current;
