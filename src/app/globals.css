@@ -3297,3 +3297,15 @@ main > section:has(> .section-rule) { padding-top: 1.5rem; }
   }
   .team-portrait { aspect-ratio: 4 / 3; }
 }
+@media (max-width: 767px) {
+  .hero-cta .btn,
+  .hero-cta .btn-xl {
+    width: auto !important;
+    max-width: 18rem;
+    align-self: flex-start;
+  }
+  .hero h1,
+  .hero p {
+    padding-right: 1rem;
+  }
+}
