@@ -4,7 +4,8 @@ const nextConfig: NextConfig = {
   // To deploy as static files (cheaper on Railway, serve via Caddy/Nginx),
   // uncomment the line below and rebuild. The `out/` directory will hold
   // the static site. See README.md for details.
-  // output: "export",
+  output: "export",
+  images: { unoptimized: true },
 
   reactStrictMode: true,
 
