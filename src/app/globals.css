@@ -306,7 +306,6 @@ body.nav-locked { overflow: hidden; }
   flex-direction: column;
   gap: 2rem;
   padding-bottom: 3rem;
-  padding-left: 20px;
 }
 .hero-cta { padding-bottom: 0.25rem; }
 @media (min-width: 768px) { .hero-content { gap: 3rem; } }
@@ -2808,6 +2807,7 @@ footer {
   justify-content: space-between;
 }
 .footer-bottom p { font-size: 0.75rem; color: var(--muted-foreground); }
+.footer-socials { display: inline-flex; align-items: center; gap: 0.75rem; }
 .social {
   width: 20px; height: 20px;
   opacity: 0.5;
@@ -2891,8 +2891,6 @@ main > section:has(> .section-rule) { padding-top: 1.5rem; }
     padding: 1.25rem 0 0;
   }
   .hero-content {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
     gap: 1.5rem;
   }
   .hero h1 {

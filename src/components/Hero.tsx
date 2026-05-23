@@ -4,10 +4,7 @@ import { Wave } from "./Wave";
 export function Hero() {
   return (
     <section className="hero px-section">
-      <div
-        className="hero-content"
-        style={{ gap: 32, alignItems: "flex-start", margin: "0 1px 0 0" }}
-      >
+      <div className="hero-content" style={{ alignItems: "flex-start" }}>
         <h1>
           The New Era of
           <br />

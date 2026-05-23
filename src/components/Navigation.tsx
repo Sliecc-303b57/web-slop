@@ -72,9 +72,14 @@ export function Navigation() {
             ))}
           </div>
           <div className="nav-actions">
-            <Link href="#" className="btn btn-ghost btn-lg">
+            <a
+              href="https://app.huddlesurety.co/"
+              className="btn btn-ghost btn-lg"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Sign In
-            </Link>
+            </a>
             <Link href="#contact" className="btn btn-default btn-lg">
               Get Started
             </Link>
@@ -111,13 +116,15 @@ export function Navigation() {
             </Link>
           ))}
           <div className="drawer-actions">
-            <Link
-              href="#"
+            <a
+              href="https://app.huddlesurety.co/"
               className="btn btn-outline"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setDrawerOpen(false)}
             >
               Sign In
-            </Link>
+            </a>
             <Link
               href="#contact"
               className="btn btn-default"
