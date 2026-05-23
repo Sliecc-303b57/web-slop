@@ -293,14 +293,14 @@ body.nav-locked { overflow: hidden; }
 /* ---------- Hero ---------- */
 .hero {
   height: calc(100vh - 65px);
-  padding: 1.5rem 0 0;
+  padding-top: 1.5rem;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-@media (min-width: 768px) { .hero { padding: 3rem 0 0; } }
-@media (min-width: 1024px) { .hero { padding: 5rem 0 0; } }
+@media (min-width: 768px) { .hero { padding-top: 3rem; } }
+@media (min-width: 1024px) { .hero { padding-top: 5rem; } }
 .hero-content {
   display: flex;
   flex-direction: column;
