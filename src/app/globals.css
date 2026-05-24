@@ -2891,6 +2891,8 @@ main > section:has(> .section-rule) { padding-top: 1.5rem; }
     padding: 1.25rem 0 0;
   }
   .hero-content {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
     gap: 1.5rem;
   }
   .hero h1 {
