@@ -30,7 +30,7 @@ const features: Feature[] = [
   {
     id: "02",
     name: "Request Automation",
-    title: "Bonding Automation",
+    title: "Request Automation",
     description:
       "Accelerate your processing & execution speeds to increase bond servicing capacity with our surety-trained AI tools.",
     Visual: AutoVisual,
